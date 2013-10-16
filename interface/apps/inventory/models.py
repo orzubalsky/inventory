@@ -25,9 +25,7 @@ class Base(Model):
         verbose_name=_("is active"),
         default=1,
         help_text=_(
-            "This field indicates whether the object is active on the "
-            "front end of the site. Inactive objects will still be available "
-            "through the admin backend."
+            "This field indicates whether the object is active on the site"
         )
     )
 
@@ -39,8 +37,8 @@ class Base(Model):
         super(Base, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        if hasattr(self, "name") and self.title:
-            return self.title
+        if hasattr(self, "name") and self.name:
+            return self.name
         else:
             return "%s" % (type(self))
 
@@ -57,9 +55,6 @@ class Node(Base):
     related_to = ManyToManyField("self", through="Edge", related_name="related nodes", symmetrical=False)
     tags = TaggableManager(blank=True)
 
-    def __unicode__(self):
-        return self.title
-
     def get_tags(self):
         return ",".join([tag.name for tag in self.tags.all()])
 
@@ -69,6 +64,8 @@ class Edge(Base):
     """
     TRANSACTION_CHOICES = (
         ('gift', _('Gift')),
+        ('grant', _('Grant')),
+        ('residency', _('Residency')),
         ('research', _('Research')),
         ('barter', _('Barter')),
         ('paid', _('Paid')),
