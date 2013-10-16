@@ -1,0 +1,28 @@
+*.pyc
+*~
+.DS_Store
+
+# ignore buildout's workspace stuff:
+.installed.cfg
+bin/
+develop-eggs/
+eggs/
+parts/
+
+# ignore settings files:
+website/settings/development.py
+website/settings/server.py
+!website/settings/__init__.py
+
+# ignore static files (for now):
+website/static/
+website/static/uploads
+
+# ignore uploaded files
+website/media/uploads
+
+# ignore cache files
+tmp
+website/tmp/
+
+data.json
