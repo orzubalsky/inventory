@@ -10,19 +10,19 @@ eggs/
 parts/
 
 # ignore settings files:
-website/settings/development.py
-website/settings/server.py
-!website/settings/__init__.py
+interface/settings/development.py
+interface/settings/server.py
+!interface/settings/__init__.py
 
 # ignore static files (for now):
-website/static/
-website/static/uploads
+interface/static/
+interface/static/uploads
 
 # ignore uploaded files
-website/media/uploads
+interface/media/uploads
 
 # ignore cache files
 tmp
-website/tmp/
+interface/tmp/
 
 data.json
