@@ -18,9 +18,10 @@ class EdgeInline(admin.TabularInline):
 class NodeAdmin(BaseAdmin):
     """
     """
+    fields = ('name',)
     list_display = ('name', 'is_active')
     list_editable = ('is_active',)
-    prepopulated_fields = {'slug': ('name',)}
+    #prepopulated_fields = {'slug': ('name',)}
     inlines = (EdgeInline, )
 
 # register admin models
