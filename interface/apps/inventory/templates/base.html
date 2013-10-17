@@ -21,29 +21,26 @@
 
     </script>    
     {% endif %}
-        
+
+    <script type="text/javascript">
+    var STATIC_URL = '{{ STATIC_URL }}';
+    {% if branch_json %}
+    var NODES = {{ branch_json }};
+    {% else %}
+    var NODES = {};    
+    {% endif %}
+    </script>        
 </head>
 <body>
-        <div id="container">
-            <div id="header">
-                <a href="">
-                    <h1>Inventory</h1>
-                </a>
-            </div>
-            
-           <div id="content">
-               {% block content %}
-                {% endblock content %}
-            </div>
-            
-            {% block navigation %}
-            {% endblock navigation %}            
-        </div>        
-    </div>
+    <div id="container">
+       <div id="content">
+           {% block content %}
+            {% endblock content %}
+        </div>
+    </div>        
     <script type="text/javascript" src="{{ STATIC_URL }}js/lib/jquery.js"></script>	
     <script type="text/javascript" src="{{ STATIC_URL }}js/lib/arbor.js"></script> 
     <script type="text/javascript" src="{{ STATIC_URL }}js/lib/arbor-tween.js"></script>         
-    <script type="text/javascript" src="{{ STATIC_URL }}js/interactions.js"></script>    
     <script type="text/javascript" src="{{ STATIC_URL }}js/site.js"></script>
     {% block extra_js %}{% endblock %}	
     </body>

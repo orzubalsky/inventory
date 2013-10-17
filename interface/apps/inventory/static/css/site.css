@@ -2,7 +2,7 @@ body {
     font-family: "Inconsolata";
     font-size: 10pt;
     margin: 0;
-    padding: 30px 32px 32px 0;
+    padding: 0;
     font-size: 10pt;
     line-height: 1.25;    
     background-color: white;
@@ -43,132 +43,7 @@ strong {
     color: black;
 }
 #container {
-    width: 800px;
-    height: auto;
-    margin: 32px 32px;
-    background-color: transparent;
-}
-.gallery {
-    margin-bottom:32px;    
-}
-.slideshow {
-    width: 800px;   
-    position: relative;
-    height: 500px;
-}
-.slideshow .item {
-    display: none;
-    position: relative;
-    overflow: hidden;
-    height: 100%;
-    width: 800px;
-}
-.slideshow .item img {
     width: 100%;
-    position: absolute;
-}
-.slideshow .controls a {
-    border-bottom: none;
-}
-.slideshow .controls {
-    width:800px;
-    text-align:right;
-}
-.gallery .list {
-    
-}
-.gallery .list .item {
-    width: 800px;
-    
-}
-.gallery .list img {
-    width: 800px;
-}
-.gallery .thumbnails {
-    
-}
-.gallery .thumbnails .item {
-    height: 100px;
-    margin: 0 20px 20px 0;
-    float: left;    
-}
-.gallery .thumbnails img {
-    height: 100%;
-}
-#content {
-    width:800px;
-    text-align:left;
-}
-
-#post-title {
-    text-align:left;
-    width: 400px;
-    height:300px;
-    float:left;
-    clear: both;
-}
-
-#post-content p {
-    text-align:left;
-    width: 400px;
-    float:left;
-}
-
-#related-posts {
-    width:400px;
-    float:left;
-    margin: 0 0 100px;
-}
-
-#related-posts a {
-    float:left;
-    text-decoration:none;
-    font-weight:normal;
-    text-align:left;
-    width:200px;
-}
-
-#related-posts a:hover {
-    text-decoration:line-through;
-
-}
-
-
-#header {
-    margin: 0 0 32px 0;
-
-}
-h1 {
-    font-size: 15pt;
-    text-transform:uppercase;
-    font-weight: bold;
-    display: inline;
-}
-#header a {
-    color: black;
-    
-}
-h1 a span {
-    color: black;
-}
-
-h2 {
-    text-transform:uppercase;
-    font-weight:bold;
-    
-}
-
-h3 {
-    font-weight:bold;
-    font-size:10pt;
-    margin-bottom:2px;
-}
-#navigation {
-    clear: both;
-    
-}
-#navigation a {
-}
-a.highlight {
-    text-transform: uppercase;
+    height: auto;
+    background-color: transparent;
 }

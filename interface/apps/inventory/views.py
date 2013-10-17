@@ -1,32 +1,14 @@
-from django.views.generic import ListView, DetailView
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 from inventory.models import *
 from inventory.forms import *
 
 
-class NodeList(ListView):
-    """
-    """
-    queryset = Node.objects.filter(is_active=True)
-    template_name = 'node_list.html'
+def node_list(request):
 
+    branch_json = Node.objects.all().serialize()
 
-class NodeDetail(DetailView):
-    """
-    """
-    model = Node
-    template_name = 'node_detail.html'
-
-
-def serialize_sound_layer(sound_queryset=None):
-    results = []
-    for sound in list(sound_queryset):
-        data = sound_to_json(sound)
-        results.append(data)
-
-    result_data = {
-        'type': 'FeatureCollection',
-        'features': results,
-    }
-    geo_json = mark_safe(json.dumps(result_data))
-
-    return geo_json
+    return render_to_response(
+        'node_list.html', {
+            'branch_json': branch_json,
+        }, context_instance=RequestContext(request))

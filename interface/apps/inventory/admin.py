@@ -8,11 +8,18 @@ class BaseAdmin(admin.ModelAdmin):
     pass
 
 
-class EdgeInline(admin.TabularInline):
+class SourceEdgeInline(admin.TabularInline):
     model = Edge
     extra = 0
     fields = ('target_node', 'transaction_type')
     fk_name = 'source_node'
+
+
+class TargetEdgeInline(admin.TabularInline):
+    model = Edge
+    extra = 0
+    fields = ('source_node', 'transaction_type')
+    fk_name = 'target_node'
 
 
 class NodeAdmin(BaseAdmin):
@@ -22,7 +29,16 @@ class NodeAdmin(BaseAdmin):
     list_display = ('name', 'is_active')
     list_editable = ('is_active',)
     #prepopulated_fields = {'slug': ('name',)}
-    inlines = (EdgeInline, )
+    inlines = (SourceEdgeInline, TargetEdgeInline)
+
+
+class EdgeAdmin(BaseAdmin):
+    """
+    """
+    list_display = ('source_node', 'target_node', 'transaction_type')
+    fields = ('source_node', 'target_node', 'transaction_type')
+
 
 # register admin models
 admin.site.register(Node, NodeAdmin)
+admin.site.register(Edge, EdgeAdmin)
