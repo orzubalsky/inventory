@@ -62,7 +62,9 @@ class NodeQuerySet(QuerySet):
         for node in node_queryset:
             node_dict[node.name] = {
                 'name': node.name,
-                'description': node.description
+                'description': node.description,
+                'node_type': node.node_type,
+                'highlight': False,
             }
 
         edge_queryset = Edge.objects.filter(
@@ -116,9 +118,19 @@ class Node(Base):
         ordering = ['name', ]
         verbose_name_plural = "nodes"
 
+    TYPE_CHOICES = (
+        ('project', _('Project')),
+        ('technology', _('Technology')),
+        ('skill', _('Skill')),
+        ('concept', _('Concept')),
+        ('process', _('Process')),
+        ('object', _('Object')),
+    )
+
     name = CharField(max_length=100, blank=True, null=True)
     description = TextField(blank=True, null=True)
     slug = SlugField(max_length=100)
+    node_type = CharField(max_length=100, blank=True, null=True, choices=TYPE_CHOICES)
     edges = ManyToManyField("self", through="Edge", symmetrical=False)
 
     objects = NodeManager()
@@ -170,3 +182,6 @@ class Edge(Base):
     )
 
     objects = EdgeManager()
+
+    def __unicode__(self):
+        return "%s - %s" % (self.source_node, self.target_node)

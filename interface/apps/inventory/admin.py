@@ -26,8 +26,8 @@ class NodeAdmin(BaseAdmin):
     """
     """
     fields = ('name',)
-    list_display = ('name', 'is_active')
-    list_editable = ('is_active',)
+    list_display = ('name', 'node_type', 'is_active')
+    list_editable = ('node_type', 'is_active',)
     #prepopulated_fields = {'slug': ('name',)}
     inlines = (SourceEdgeInline, TargetEdgeInline)
 

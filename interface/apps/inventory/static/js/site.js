@@ -19,7 +19,6 @@
         if (particleSystem===null) return
 
         ctx.clearRect(0,0, canvas.width, canvas.height)
-        ctx.strokeStyle = "#d3d3d3"
         ctx.lineWidth = 1
         ctx.beginPath()
         particleSystem.eachEdge(function(edge, pt1, pt2){
@@ -27,7 +26,7 @@
           // pt1:  {x:#, y:#}  source position in screen coords
           // pt2:  {x:#, y:#}  target position in screen coords
 
-          var weight = 2 // Math.max(1,edge.data.border/100)
+          var weight = 1 // Math.max(1,edge.data.border/100)
           var color = "#FFF000" // edge.data.color
           if (!color || (""+color).match(/^[ \t]*$/)) color = null
 
@@ -37,17 +36,32 @@
 
             if (!isNaN(weight)) ctx.lineWidth = weight
             
-            if (edge.data.transaction_type=='grant'){
-              ctx.strokeStyle = "#0000FF"
+            if (edge.data.transaction_type=='gift'){
+              ctx.strokeStyle = "#BD15A4"
             }
+            else if (edge.data.transaction_type=='grant'){
+              ctx.strokeStyle = "#13B09E"
+            }
+            else if (edge.data.transaction_type=='residency'){
+              ctx.strokeStyle = "#23B013"
+            }
+            else if (edge.data.transaction_type=='installation'){
+              ctx.strokeStyle = "#D67E0B"
+            }
+            else if (edge.data.transaction_type=='performance'){
+              ctx.strokeStyle = "#D67E0B"
+            }   
+            else if (edge.data.transaction_type=='research'){
+              ctx.strokeStyle = "#2097E6"
+            }                   
             else if (edge.data.transaction_type=='barter'){
-              ctx.strokeStyle = "#00FF00"
-            }
+              ctx.strokeStyle = "#131DAD"
+            }  
             else if (edge.data.transaction_type=='paid'){
-              ctx.strokeStyle = "#FFFF00"
-            }            
+              ctx.strokeStyle = "#CC219E"
+            }                                          
             else {
-              ctx.strokeStyle = "#FF0000"
+              ctx.strokeStyle = "#bbbbbb"
             }
 
             // if (color) ctx.strokeStyle = color
@@ -92,12 +106,17 @@
 
           // draw the text
           if (label){
-            ctx.font = "bold 11px Arial"
+            ctx.font = "normal 8pt 'Andale Mono'"
             ctx.textAlign = "center"
             
             // if (node.data.region) ctx.fillStyle = palette[node.data.region]
             // else ctx.fillStyle = "#888888"
-            ctx.fillStyle = "#888888"
+            if (node.data.highlight==true){
+              ctx.fillStyle = "#FF0000";
+            }
+            else {
+              ctx.fillStyle = "#123123"
+            }
 
             // ctx.fillText(label||"", pt.x, pt.y+4)
             ctx.fillText(label||"", pt.x, pt.y+4)
@@ -172,6 +191,26 @@
         var sys = arbor.ParticleSystem(4000, 500, 0.5, 55)
         sys.renderer = Renderer("#viewport") 
         sys.merge(NODES);
-    })
+
+        $('#projects').mouseover(function(e)
+        {
+          var canvas = $('#viewport').get(0)
+          var ctx = canvas.getContext("2d")
+          sys.eachNode(function(node, pt){
+          // node: {mass:#, p:{x,y}, name:"", data:{}}
+          // pt:   {x:#, y:#}  node position in screen coords
+          
+
+          // determine the box size and round off the coords if we'll be 
+          // drawing a text label (awful alignment jitter otherwise...)
+            if (node.data.node_type='project')
+            {
+                node.data.hightlight=true;   
+            }
+            
+          });
+        });        
+
+    });
   
 })()
