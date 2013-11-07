@@ -1,6 +1,7 @@
 from django.contrib import admin
 from core.admin import *
 from inventory.models import *
+from inventory.forms import *
 
 
 class SourceEdgeInline(BaseTabularInline):
@@ -17,6 +18,7 @@ class TargetEdgeInline(BaseTabularInline):
 
 class NodeArrowSpectrumInline(BaseTabularInline):
     model = NodeArrowSpectrum
+    form = NodeArrowSpectrumForm
 
 
 class NodeLineSpectrumInline(BaseTabularInline):
@@ -76,6 +78,13 @@ class EdgeAdmin(BaseAdmin):
         EdgeCrossSpectrumInline,
     )
 
+
+class NodeArrowSpectrumAdmin(BaseAdmin):
+    fields = ('node', 'relation', 'value_x')
+    form = NodeArrowSpectrumForm
+
+
 # register admin models
 admin.site.register(Node, NodeAdmin)
 admin.site.register(Edge, EdgeAdmin)
+admin.site.register(NodeArrowSpectrum, NodeArrowSpectrumAdmin)

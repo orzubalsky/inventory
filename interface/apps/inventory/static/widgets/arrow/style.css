@@ -1,0 +1,33 @@
+.spectrumContainer {
+    height: 20px;
+    background-color: #e1e1e1;
+    margin: 0 6px 6px 0;
+    position: relative;
+    width: 72%;
+    float: left;
+    cursor: pointer;
+}
+.color {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    background-color: #aaa;    
+}
+div.spectrum {
+    width: 5%;
+    height: 100%;
+    background-color: #333;
+    cursor: pointer;
+}
+div.spectrum:hover {
+    background-color: #000;
+}
+p.spectrum {
+   float: left;
+   font-size: 8pt;
+   position: relative;
+   top: 4px;
+}
