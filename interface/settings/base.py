@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     'taggit',                       # tagging app
     'dajaxice',                     # django ajax app
     'debug_toolbar',
+    'core',
     'inventory',
 )
 

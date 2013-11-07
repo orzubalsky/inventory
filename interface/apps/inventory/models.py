@@ -1,49 +1,55 @@
 from django.db.models import *
 from django.utils.translation import ugettext_lazy as _
-from django.utils import timezone
 from django.utils import simplejson as json
 from django.utils.safestring import mark_safe
-from django.forms.models import model_to_dict
 from django.db.models.query import QuerySet
+from django.contrib.contenttypes.generic import *
+from core.models import *
+from core.fields import *
 
 
-class Base(Model):
+class NodeRelationMixin(Model):
     """
-    Base model for all of the models in ff.
     """
-    class Meta:
-        abstract = True
+    node = ForeignKey("Node")
 
-    created = DateTimeField(
-        verbose_name=_("created"),
-        editable=False,
-        help_text=_("The time when this object was created.")
-    )
-    updated = DateTimeField(
-        verbose_name=_("updated"),
-        editable=False,
-        help_text=_("The time when this object was edited last.")
-    )
-    is_active = BooleanField(
-        verbose_name=_("is active"),
-        default=1,
-        help_text=_(
-            "This field indicates whether the object is active on the site"
-        )
-    )
 
-    def save(self, *args, **kwargs):
-        """Save timezone-aware values for created and updated fields."""
-        if self.pk is None:
-            self.created = timezone.now()
-        self.updated = timezone.now()
-        super(Base, self).save(*args, **kwargs)
+class NodeArrowSpectrum(ArrowSpectrum, NodeRelationMixin):
+    pass
 
-    def __unicode__(self):
-        if hasattr(self, "name") and self.name:
-            return self.name
-        else:
-            return "%s" % (type(self))
+
+class NodeLineSpectrum(LineSpectrum, NodeRelationMixin):
+    pass
+
+
+class NodeTriangleSpectrum(TriangleSpectrum, NodeRelationMixin):
+    pass
+
+
+class NodeCrossSpectrum(CrossSpectrum, NodeRelationMixin):
+    pass
+
+
+class EdgeRelationMixin(Model):
+    """
+    """
+    edge = ForeignKey("Edge")
+
+
+class EdgeArrowSpectrum(ArrowSpectrum, EdgeRelationMixin):
+    pass
+
+
+class EdgeLineSpectrum(LineSpectrum, EdgeRelationMixin):
+    pass
+
+
+class EdgeTriangleSpectrum(TriangleSpectrum, EdgeRelationMixin):
+    pass
+
+
+class EdgeCrossSpectrum(CrossSpectrum, EdgeRelationMixin):
+    pass
 
 
 class NodeQuerySet(QuerySet):
@@ -133,6 +139,11 @@ class Node(Base):
     node_type = CharField(max_length=100, blank=True, null=True, choices=TYPE_CHOICES)
     edges = ManyToManyField("self", through="Edge", symmetrical=False)
 
+    arrows = ManyToManyField(Arrow, through=NodeArrowSpectrum)
+    lines = ManyToManyField(Line, through=NodeLineSpectrum)
+    triangles = ManyToManyField(Triangle, through=NodeTriangleSpectrum)
+    crosses = ManyToManyField(Cross, through=NodeCrossSpectrum)
+
     objects = NodeManager()
 
     def get_tags(self):
@@ -180,6 +191,11 @@ class Edge(Base):
         blank=True,
         null=True
     )
+
+    arrows = ManyToManyField(Arrow, through=EdgeArrowSpectrum)
+    lines = ManyToManyField(Line, through=EdgeLineSpectrum)
+    triangles = ManyToManyField(Triangle, through=EdgeTriangleSpectrum)
+    crosses = ManyToManyField(Cross, through=EdgeCrossSpectrum)
 
     objects = EdgeManager()
 

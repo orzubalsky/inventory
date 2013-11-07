@@ -8,152 +8,36 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'NodeRelationMixin'
-        db.create_table(u'inventory_noderelationmixin', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('node', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['inventory.Node'])),
-        ))
-        db.send_create_signal(u'inventory', ['NodeRelationMixin'])
-
-        # Adding model 'NodeArrowSpectrum'
-        db.create_table(u'inventory_nodearrowspectrum', (
-            (u'noderelationmixin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['inventory.NodeRelationMixin'], unique=True, primary_key=True)),
-            ('value_x', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
-            ('relation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Arrow'])),
-        ))
-        db.send_create_signal(u'inventory', ['NodeArrowSpectrum'])
-
-        # Adding model 'NodeLineSpectrum'
-        db.create_table(u'inventory_nodelinespectrum', (
-            (u'noderelationmixin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['inventory.NodeRelationMixin'], unique=True, primary_key=True)),
-            ('value_x', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
-            ('relation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Line'])),
-        ))
-        db.send_create_signal(u'inventory', ['NodeLineSpectrum'])
-
-        # Adding model 'NodeTriangleSpectrum'
-        db.create_table(u'inventory_nodetrianglespectrum', (
-            (u'noderelationmixin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['inventory.NodeRelationMixin'], unique=True, primary_key=True)),
-            ('value_x', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
-            ('value_y', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
-            ('value_z', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
-            ('relation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Triangle'])),
-        ))
-        db.send_create_signal(u'inventory', ['NodeTriangleSpectrum'])
-
-        # Adding model 'NodeCrossSpectrum'
-        db.create_table(u'inventory_nodecrossspectrum', (
-            (u'noderelationmixin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['inventory.NodeRelationMixin'], unique=True, primary_key=True)),
-            ('value_x', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
-            ('value_y', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
-            ('relation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Cross'])),
-        ))
-        db.send_create_signal(u'inventory', ['NodeCrossSpectrum'])
-
-        # Adding model 'EdgeRelationMixin'
-        db.create_table(u'inventory_edgerelationmixin', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('edge', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['inventory.Edge'])),
-        ))
-        db.send_create_signal(u'inventory', ['EdgeRelationMixin'])
-
-        # Adding model 'EdgeArrowSpectrum'
-        db.create_table(u'inventory_edgearrowspectrum', (
-            (u'edgerelationmixin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['inventory.EdgeRelationMixin'], unique=True, primary_key=True)),
-            ('value_x', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
-            ('relation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Arrow'])),
-        ))
-        db.send_create_signal(u'inventory', ['EdgeArrowSpectrum'])
-
-        # Adding model 'EdgeLineSpectrum'
-        db.create_table(u'inventory_edgelinespectrum', (
-            (u'edgerelationmixin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['inventory.EdgeRelationMixin'], unique=True, primary_key=True)),
-            ('value_x', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
-            ('relation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Line'])),
-        ))
-        db.send_create_signal(u'inventory', ['EdgeLineSpectrum'])
-
-        # Adding model 'EdgeTriangleSpectrum'
-        db.create_table(u'inventory_edgetrianglespectrum', (
-            (u'edgerelationmixin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['inventory.EdgeRelationMixin'], unique=True, primary_key=True)),
-            ('value_x', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
-            ('value_y', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
-            ('value_z', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
-            ('relation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Triangle'])),
-        ))
-        db.send_create_signal(u'inventory', ['EdgeTriangleSpectrum'])
-
-        # Adding model 'EdgeCrossSpectrum'
-        db.create_table(u'inventory_edgecrossspectrum', (
-            (u'edgerelationmixin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['inventory.EdgeRelationMixin'], unique=True, primary_key=True)),
-            ('value_x', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
-            ('value_y', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
-            ('relation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Cross'])),
-        ))
-        db.send_create_signal(u'inventory', ['EdgeCrossSpectrum'])
-
-        # Adding model 'Node'
-        db.create_table(u'inventory_node', (
+        # Adding model 'Taxonomy'
+        db.create_table(u'inventory_taxonomy', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('created', self.gf('django.db.models.fields.DateTimeField')()),
             ('updated', self.gf('django.db.models.fields.DateTimeField')()),
             ('is_active', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=100, null=True, blank=True)),
-            ('description', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=100)),
-            ('node_type', self.gf('django.db.models.fields.CharField')(max_length=100, null=True, blank=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
         ))
-        db.send_create_signal(u'inventory', ['Node'])
+        db.send_create_signal(u'inventory', ['Taxonomy'])
 
-        # Adding model 'Edge'
-        db.create_table(u'inventory_edge', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('created', self.gf('django.db.models.fields.DateTimeField')()),
-            ('updated', self.gf('django.db.models.fields.DateTimeField')()),
-            ('is_active', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('source_node', self.gf('django.db.models.fields.related.ForeignKey')(related_name='source_node', to=orm['inventory.Node'])),
-            ('target_node', self.gf('django.db.models.fields.related.ForeignKey')(related_name='target_node', to=orm['inventory.Node'])),
-            ('transaction_type', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
-        ))
-        db.send_create_signal(u'inventory', ['Edge'])
+        # Adding field 'NodeRelationMixin.taxonomy'
+        db.add_column(u'inventory_noderelationmixin', 'taxonomy',
+                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['inventory.Taxonomy'], null=True, blank=True),
+                      keep_default=False)
+
+        # Adding field 'EdgeRelationMixin.taxonomy'
+        db.add_column(u'inventory_edgerelationmixin', 'taxonomy',
+                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['inventory.Taxonomy'], null=True, blank=True),
+                      keep_default=False)
 
 
     def backwards(self, orm):
-        # Deleting model 'NodeRelationMixin'
-        db.delete_table(u'inventory_noderelationmixin')
+        # Deleting model 'Taxonomy'
+        db.delete_table(u'inventory_taxonomy')
 
-        # Deleting model 'NodeArrowSpectrum'
-        db.delete_table(u'inventory_nodearrowspectrum')
+        # Deleting field 'NodeRelationMixin.taxonomy'
+        db.delete_column(u'inventory_noderelationmixin', 'taxonomy_id')
 
-        # Deleting model 'NodeLineSpectrum'
-        db.delete_table(u'inventory_nodelinespectrum')
-
-        # Deleting model 'NodeTriangleSpectrum'
-        db.delete_table(u'inventory_nodetrianglespectrum')
-
-        # Deleting model 'NodeCrossSpectrum'
-        db.delete_table(u'inventory_nodecrossspectrum')
-
-        # Deleting model 'EdgeRelationMixin'
-        db.delete_table(u'inventory_edgerelationmixin')
-
-        # Deleting model 'EdgeArrowSpectrum'
-        db.delete_table(u'inventory_edgearrowspectrum')
-
-        # Deleting model 'EdgeLineSpectrum'
-        db.delete_table(u'inventory_edgelinespectrum')
-
-        # Deleting model 'EdgeTriangleSpectrum'
-        db.delete_table(u'inventory_edgetrianglespectrum')
-
-        # Deleting model 'EdgeCrossSpectrum'
-        db.delete_table(u'inventory_edgecrossspectrum')
-
-        # Deleting model 'Node'
-        db.delete_table(u'inventory_node')
-
-        # Deleting model 'Edge'
-        db.delete_table(u'inventory_edge')
+        # Deleting field 'EdgeRelationMixin.taxonomy'
+        db.delete_column(u'inventory_edgerelationmixin', 'taxonomy_id')
 
 
     models = {
@@ -219,7 +103,8 @@ class Migration(SchemaMigration):
         u'inventory.edgerelationmixin': {
             'Meta': {'object_name': 'EdgeRelationMixin'},
             'edge': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['inventory.Edge']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'taxonomy': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['inventory.Taxonomy']", 'null': 'True', 'blank': 'True'})
         },
         u'inventory.edgetrianglespectrum': {
             'Meta': {'object_name': 'EdgeTriangleSpectrum', '_ormbases': [u'inventory.EdgeRelationMixin']},
@@ -267,7 +152,8 @@ class Migration(SchemaMigration):
         u'inventory.noderelationmixin': {
             'Meta': {'object_name': 'NodeRelationMixin'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'node': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['inventory.Node']"})
+            'node': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['inventory.Node']"}),
+            'taxonomy': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['inventory.Taxonomy']", 'null': 'True', 'blank': 'True'})
         },
         u'inventory.nodetrianglespectrum': {
             'Meta': {'object_name': 'NodeTriangleSpectrum', '_ormbases': [u'inventory.NodeRelationMixin']},
@@ -276,6 +162,14 @@ class Migration(SchemaMigration):
             'value_x': ('django.db.models.fields.DecimalField', [], {'max_digits': '4', 'decimal_places': '3'}),
             'value_y': ('django.db.models.fields.DecimalField', [], {'max_digits': '4', 'decimal_places': '3'}),
             'value_z': ('django.db.models.fields.DecimalField', [], {'max_digits': '4', 'decimal_places': '3'})
+        },
+        u'inventory.taxonomy': {
+            'Meta': {'object_name': 'Taxonomy'},
+            'created': ('django.db.models.fields.DateTimeField', [], {}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'updated': ('django.db.models.fields.DateTimeField', [], {})
         }
     }
 
