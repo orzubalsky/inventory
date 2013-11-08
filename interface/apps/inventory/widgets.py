@@ -1,6 +1,7 @@
 from django.forms import widgets
 from django.conf import settings
 from django.template.loader import render_to_string
+from core.models import *
 
 
 class SpectrumWidget(widgets.TextInput):
@@ -25,7 +26,7 @@ class SpectrumWidget(widgets.TextInput):
         return render_to_string('widgets/spectrum.html', params)
 
 
-class CrossWidget(widgets.TextInput):
+class CrossWidget(widgets.Select):
     class Media:
         css = {
             'all': ('widgets/cross/style.css',)
@@ -37,11 +38,18 @@ class CrossWidget(widgets.TextInput):
             'widgets/cross/interaction.js',
         )
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, empty_value='', attrs=None, choices=()):
+
+        output = super(CrossWidget, self).render(name, value, attrs, choices)
+
+        try:
+            relation = Cross.objects.get(pk=value)
+        except Cross.DoesNotExist:
+            relation = None
 
         params = {
-            'field_name': name,
-            'value': value,
+            'field': output,
+            'relation': relation
         }
-
         return render_to_string('widgets/cross.html', params)
+

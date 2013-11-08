@@ -20,11 +20,12 @@ class NodeLineSpectrumForm(forms.ModelForm):
             'value_x': SpectrumWidget()
         }
 
-
 class NodeCrossSpectrumForm(forms.ModelForm):
     class Meta:
         model = NodeCrossSpectrum
-        fields = ('node', 'relation', 'value_x', 'value_y')
+        fields = ('node', 'relation', 'value_x', 'value_y',)
         widgets = {
-            'value_x': CrossWidget()
+            'relation': CrossWidget(),
+            'value_x': forms.widgets.TextInput(),
+            'value_y': forms.widgets.TextInput(),
         }

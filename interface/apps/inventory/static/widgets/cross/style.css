@@ -1,11 +1,43 @@
+.widgetContainer {
+	width: 200px;
+	height: 200px;
+	position: relative;	
+	padding: 16px 32px;
+}
 .crossContainer {
 	position: relative;
 	height: 200px;
-	width: 200px;	
+	width: 200px;
+	margin: 0px auto;
 }
 .cross {
 	position: absolute;
 	height: 100%;
 	width: 100%;
 	background-color: transparent;
+}
+.key {
+	position: absolute;
+}
+.key_x1 {
+    left: 0;
+    top: 106px;
+}
+.key_x2 {
+    top: 106px;
+	right: 0;
+}
+.key_y1 {
+	top: 0;
+	left: 125px;
+}
+.key_y2 {
+	bottom: 0;
+	left: 125px;
+}
+.hide {
+	display: none;
+}
+.value_x, .value_y {
+	display: none;
 }

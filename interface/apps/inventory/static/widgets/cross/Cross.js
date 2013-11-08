@@ -7,8 +7,8 @@
         this.width = $element.width();
         this.height = $element.height();
        
-        this.$formFieldX = this.$container.children('input').eq(0);
-        this.$formFieldY = this.$container.children('input').eq(1);
+        this.$formFieldX = $('#id_value_x');
+        this.$formFieldY = $('#id_value_y');
 
         this.minX;
         this.maxX;
@@ -37,6 +37,8 @@
         self.initHandle();
 
         self.stage.add(self.layer);
+
+        self.setValuesFromFormField();
     };      
 	
 
@@ -164,13 +166,16 @@
     {
         var self = this;
 
-        var value = self.$formField.val();
+        var value_x = self.$formFieldX.val();
+        var value_y = self.$formFieldY.val();
 
-        var left = value * (self.containerWidth - self.$element.width() / 2);
-        
-        self.$element.css({'left':left});
+        var x = value_x * (self.width - self.handleSize / 2);
+        var y = value_y * (self.height - self.handleSize / 2);
 
-        self.layerOpacity(value);
+        self.layer.clear();
+        self.handle.setX(x);
+        self.handle.setY(y);
+        self.layer.draw();
     };
 
 	/* calculate the layer's opacity values by the scrollbar progress */
