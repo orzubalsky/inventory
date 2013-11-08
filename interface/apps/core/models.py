@@ -135,7 +135,7 @@ class Spectrum(Model):
     value_x = DecimalField(max_digits=4, decimal_places=3)
 
     def __unicode__(self):
-        return "%s: %f" % (type(self), self.value)
+        return "%s: %f" % (type(self), self.value_x)
 
 
 class ArrowSpectrum(Spectrum):
@@ -147,9 +147,6 @@ class ArrowSpectrum(Spectrum):
 
     relation = ForeignKey(Arrow)
 
-    def __unicode__(self):
-        return "%s: %f" % (self.relation, self.value)
-
 
 class LineSpectrum(Spectrum):
     """
@@ -159,9 +156,6 @@ class LineSpectrum(Spectrum):
         verbose_name_plural = "line spectra"
 
     relation = ForeignKey(Line)
-
-    def __unicode__(self):
-        return "%s: %f" % (self.relation, self.value)
 
 
 class TriangleSpectrum(Spectrum):
@@ -175,9 +169,6 @@ class TriangleSpectrum(Spectrum):
     value_z = DecimalField(max_digits=4, decimal_places=3)
     relation = ForeignKey(Triangle)
 
-    def __unicode__(self):
-        return "%s: %f" % (self.relation, self.value)
-
 
 class CrossSpectrum(Spectrum):
     """
@@ -188,6 +179,3 @@ class CrossSpectrum(Spectrum):
 
     value_y = DecimalField(max_digits=4, decimal_places=3)
     relation = ForeignKey(Cross)
-
-    def __unicode__(self):
-        return "%s: %f" % (self.relation, self.value)

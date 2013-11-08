@@ -19,6 +19,7 @@ class ArrowSpectrumWidget(widgets.TextInput):
 
         params = {
             'field_name': name,
+            'value': value,
         }
 
         return render_to_string('widgets/arrow.html', params)

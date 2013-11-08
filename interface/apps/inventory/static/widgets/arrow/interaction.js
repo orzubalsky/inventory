@@ -22,8 +22,7 @@
             {
                 var $spectra = $('.spectrum');
                 var new_count = $spectra.size();
-                console.log("count: " + self.count);
-                console.log("new_count: " + new_count);
+
                 if (new_count > self.count)
                 {
                     for (var i=0; i < new_count; i++)
@@ -42,9 +41,7 @@
         {
             var self = this;
             var $spectra = $('.spectrum');
-            console.log($spectra);
             self.count = $spectra.size();
-            console.log("intial count: " + self.count);
             
             for (var i=0; i < $spectra.size(); i++)
             {

@@ -11,7 +11,7 @@ from core.fields import *
 class NodeRelationMixin(Model):
     """
     """
-    node = ForeignKey("Node")
+    node = OneToOneField("Node")
 
 
 class NodeArrowSpectrum(ArrowSpectrum, NodeRelationMixin):

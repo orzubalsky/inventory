@@ -14,9 +14,8 @@
         
         // init methods
         this.getDimensions();
+        this.setValuesFromFormField();
         this.interaction();        
-
-        console.log(this.$element);
 	};
 	
     /* Calculate the scrollbar container width according to the container and the scrollbar widths */		
@@ -29,6 +28,19 @@
 		self.containerWidth = containerWidth - sliderWidth;
 	};
 	
+    Spectrum.prototype.setValuesFromFormField = function()
+    {
+        var self = this;
+
+        var value = self.$formField.val();
+
+        var left = value * (self.containerWidth - self.$element.width() / 2);
+        
+        self.$element.css({'left':left});
+
+        self.layerOpacity(value);
+    };
+
 	/* animate the scrollbar on initialization to demo the interaction */
 	Spectrum.prototype.animate = function(pxPerStep, targetLeft)
 	{
@@ -66,6 +78,11 @@
         });
 
         // people can drag the scrollbar 
+        if (self.$element.data('draggable'))
+        {
+            self.$element.draggable("destroy");
+        }
+
 		self.$element.draggable({
 		    axis: "x",
             containment: self.$container,
@@ -106,6 +123,7 @@
 		    self.$element.css({'left':left});
 		    var progress = xPos / self.containerWidth;
 		    self.layerOpacity(progress);
+            self.updateFormField(progress);
 		});
 	};
 	
@@ -123,7 +141,7 @@
 
         // round to 3 places after decimal point
         var rounded_value = Math.round(value * 1000) / 1000;
-        
+
         // update page field
         self.$formField.val(rounded_value);
     };
