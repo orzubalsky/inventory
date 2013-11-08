@@ -8,48 +8,52 @@ from core.models import *
 from core.fields import *
 
 
-class NodeRelationMixin(Model):
-    """
-    """
-    node = OneToOneField("Node")
+class NodeArrowSpectrum(ArrowSpectrum):
+    class Meta:
+        unique_together = ("node", "relation")
+    node = ForeignKey("Node")
 
 
-class NodeArrowSpectrum(ArrowSpectrum, NodeRelationMixin):
-    pass
+class NodeLineSpectrum(LineSpectrum):
+    class Meta:
+        unique_together = ("node", "relation")
+    node = ForeignKey("Node")
 
 
-class NodeLineSpectrum(LineSpectrum, NodeRelationMixin):
-    pass
+class NodeTriangleSpectrum(TriangleSpectrum):
+    class Meta:
+        unique_together = ("node", "relation")
+    node = ForeignKey("Node")
 
 
-class NodeTriangleSpectrum(TriangleSpectrum, NodeRelationMixin):
-    pass
+class NodeCrossSpectrum(CrossSpectrum):
+    class Meta:
+        unique_together = ("node", "relation")
+    node = ForeignKey("Node")
 
 
-class NodeCrossSpectrum(CrossSpectrum, NodeRelationMixin):
-    pass
-
-
-class EdgeRelationMixin(Model):
-    """
-    """
+class EdgeArrowSpectrum(ArrowSpectrum):
+    class Meta:
+        unique_together = ("edge", "relation")
     edge = ForeignKey("Edge")
 
 
-class EdgeArrowSpectrum(ArrowSpectrum, EdgeRelationMixin):
-    pass
+class EdgeLineSpectrum(LineSpectrum):
+    class Meta:
+        unique_together = ("edge", "relation")
+    edge = ForeignKey("Edge")
 
 
-class EdgeLineSpectrum(LineSpectrum, EdgeRelationMixin):
-    pass
+class EdgeTriangleSpectrum(TriangleSpectrum):
+    class Meta:
+        unique_together = ("edge", "relation")
+    edge = ForeignKey("Edge")
 
 
-class EdgeTriangleSpectrum(TriangleSpectrum, EdgeRelationMixin):
-    pass
-
-
-class EdgeCrossSpectrum(CrossSpectrum, EdgeRelationMixin):
-    pass
+class EdgeCrossSpectrum(CrossSpectrum):
+    class Meta:
+        unique_together = ("edge", "relation")
+    edge = ForeignKey("Edge")
 
 
 class NodeQuerySet(QuerySet):

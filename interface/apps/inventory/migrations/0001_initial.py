@@ -8,89 +8,107 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'NodeRelationMixin'
-        db.create_table(u'inventory_noderelationmixin', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('node', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['inventory.Node'])),
-        ))
-        db.send_create_signal(u'inventory', ['NodeRelationMixin'])
-
         # Adding model 'NodeArrowSpectrum'
         db.create_table(u'inventory_nodearrowspectrum', (
-            (u'noderelationmixin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['inventory.NodeRelationMixin'], unique=True, primary_key=True)),
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('value_x', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
             ('relation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Arrow'])),
+            ('node', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['inventory.Node'])),
         ))
         db.send_create_signal(u'inventory', ['NodeArrowSpectrum'])
 
+        # Adding unique constraint on 'NodeArrowSpectrum', fields ['node', 'relation']
+        db.create_unique(u'inventory_nodearrowspectrum', ['node_id', 'relation_id'])
+
         # Adding model 'NodeLineSpectrum'
         db.create_table(u'inventory_nodelinespectrum', (
-            (u'noderelationmixin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['inventory.NodeRelationMixin'], unique=True, primary_key=True)),
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('value_x', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
             ('relation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Line'])),
+            ('node', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['inventory.Node'])),
         ))
         db.send_create_signal(u'inventory', ['NodeLineSpectrum'])
 
+        # Adding unique constraint on 'NodeLineSpectrum', fields ['node', 'relation']
+        db.create_unique(u'inventory_nodelinespectrum', ['node_id', 'relation_id'])
+
         # Adding model 'NodeTriangleSpectrum'
         db.create_table(u'inventory_nodetrianglespectrum', (
-            (u'noderelationmixin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['inventory.NodeRelationMixin'], unique=True, primary_key=True)),
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('value_x', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
             ('value_y', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
             ('value_z', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
             ('relation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Triangle'])),
+            ('node', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['inventory.Node'])),
         ))
         db.send_create_signal(u'inventory', ['NodeTriangleSpectrum'])
 
+        # Adding unique constraint on 'NodeTriangleSpectrum', fields ['node', 'relation']
+        db.create_unique(u'inventory_nodetrianglespectrum', ['node_id', 'relation_id'])
+
         # Adding model 'NodeCrossSpectrum'
         db.create_table(u'inventory_nodecrossspectrum', (
-            (u'noderelationmixin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['inventory.NodeRelationMixin'], unique=True, primary_key=True)),
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('value_x', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
             ('value_y', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
             ('relation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Cross'])),
+            ('node', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['inventory.Node'])),
         ))
         db.send_create_signal(u'inventory', ['NodeCrossSpectrum'])
 
-        # Adding model 'EdgeRelationMixin'
-        db.create_table(u'inventory_edgerelationmixin', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('edge', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['inventory.Edge'])),
-        ))
-        db.send_create_signal(u'inventory', ['EdgeRelationMixin'])
+        # Adding unique constraint on 'NodeCrossSpectrum', fields ['node', 'relation']
+        db.create_unique(u'inventory_nodecrossspectrum', ['node_id', 'relation_id'])
 
         # Adding model 'EdgeArrowSpectrum'
         db.create_table(u'inventory_edgearrowspectrum', (
-            (u'edgerelationmixin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['inventory.EdgeRelationMixin'], unique=True, primary_key=True)),
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('value_x', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
             ('relation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Arrow'])),
+            ('edge', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['inventory.Edge'])),
         ))
         db.send_create_signal(u'inventory', ['EdgeArrowSpectrum'])
 
+        # Adding unique constraint on 'EdgeArrowSpectrum', fields ['edge', 'relation']
+        db.create_unique(u'inventory_edgearrowspectrum', ['edge_id', 'relation_id'])
+
         # Adding model 'EdgeLineSpectrum'
         db.create_table(u'inventory_edgelinespectrum', (
-            (u'edgerelationmixin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['inventory.EdgeRelationMixin'], unique=True, primary_key=True)),
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('value_x', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
             ('relation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Line'])),
+            ('edge', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['inventory.Edge'])),
         ))
         db.send_create_signal(u'inventory', ['EdgeLineSpectrum'])
 
+        # Adding unique constraint on 'EdgeLineSpectrum', fields ['edge', 'relation']
+        db.create_unique(u'inventory_edgelinespectrum', ['edge_id', 'relation_id'])
+
         # Adding model 'EdgeTriangleSpectrum'
         db.create_table(u'inventory_edgetrianglespectrum', (
-            (u'edgerelationmixin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['inventory.EdgeRelationMixin'], unique=True, primary_key=True)),
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('value_x', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
             ('value_y', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
             ('value_z', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
             ('relation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Triangle'])),
+            ('edge', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['inventory.Edge'])),
         ))
         db.send_create_signal(u'inventory', ['EdgeTriangleSpectrum'])
 
+        # Adding unique constraint on 'EdgeTriangleSpectrum', fields ['edge', 'relation']
+        db.create_unique(u'inventory_edgetrianglespectrum', ['edge_id', 'relation_id'])
+
         # Adding model 'EdgeCrossSpectrum'
         db.create_table(u'inventory_edgecrossspectrum', (
-            (u'edgerelationmixin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['inventory.EdgeRelationMixin'], unique=True, primary_key=True)),
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('value_x', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
             ('value_y', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=3)),
             ('relation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Cross'])),
+            ('edge', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['inventory.Edge'])),
         ))
         db.send_create_signal(u'inventory', ['EdgeCrossSpectrum'])
+
+        # Adding unique constraint on 'EdgeCrossSpectrum', fields ['edge', 'relation']
+        db.create_unique(u'inventory_edgecrossspectrum', ['edge_id', 'relation_id'])
 
         # Adding model 'Node'
         db.create_table(u'inventory_node', (
@@ -119,8 +137,29 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
-        # Deleting model 'NodeRelationMixin'
-        db.delete_table(u'inventory_noderelationmixin')
+        # Removing unique constraint on 'EdgeCrossSpectrum', fields ['edge', 'relation']
+        db.delete_unique(u'inventory_edgecrossspectrum', ['edge_id', 'relation_id'])
+
+        # Removing unique constraint on 'EdgeTriangleSpectrum', fields ['edge', 'relation']
+        db.delete_unique(u'inventory_edgetrianglespectrum', ['edge_id', 'relation_id'])
+
+        # Removing unique constraint on 'EdgeLineSpectrum', fields ['edge', 'relation']
+        db.delete_unique(u'inventory_edgelinespectrum', ['edge_id', 'relation_id'])
+
+        # Removing unique constraint on 'EdgeArrowSpectrum', fields ['edge', 'relation']
+        db.delete_unique(u'inventory_edgearrowspectrum', ['edge_id', 'relation_id'])
+
+        # Removing unique constraint on 'NodeCrossSpectrum', fields ['node', 'relation']
+        db.delete_unique(u'inventory_nodecrossspectrum', ['node_id', 'relation_id'])
+
+        # Removing unique constraint on 'NodeTriangleSpectrum', fields ['node', 'relation']
+        db.delete_unique(u'inventory_nodetrianglespectrum', ['node_id', 'relation_id'])
+
+        # Removing unique constraint on 'NodeLineSpectrum', fields ['node', 'relation']
+        db.delete_unique(u'inventory_nodelinespectrum', ['node_id', 'relation_id'])
+
+        # Removing unique constraint on 'NodeArrowSpectrum', fields ['node', 'relation']
+        db.delete_unique(u'inventory_nodearrowspectrum', ['node_id', 'relation_id'])
 
         # Deleting model 'NodeArrowSpectrum'
         db.delete_table(u'inventory_nodearrowspectrum')
@@ -133,9 +172,6 @@ class Migration(SchemaMigration):
 
         # Deleting model 'NodeCrossSpectrum'
         db.delete_table(u'inventory_nodecrossspectrum')
-
-        # Deleting model 'EdgeRelationMixin'
-        db.delete_table(u'inventory_edgerelationmixin')
 
         # Deleting model 'EdgeArrowSpectrum'
         db.delete_table(u'inventory_edgearrowspectrum')
@@ -160,7 +196,8 @@ class Migration(SchemaMigration):
         u'core.arrow': {
             'Meta': {'object_name': 'Arrow'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'key_x': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+            'key_x': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'taxonomy': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.Taxonomy']", 'null': 'True', 'blank': 'True'})
         },
         u'core.cross': {
             'Meta': {'object_name': 'Cross'},
@@ -168,20 +205,31 @@ class Migration(SchemaMigration):
             'key_x1': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'key_x2': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'key_y1': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'key_y2': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+            'key_y2': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'taxonomy': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.Taxonomy']", 'null': 'True', 'blank': 'True'})
         },
         u'core.line': {
             'Meta': {'object_name': 'Line'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'key_x1': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'key_x2': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+            'key_x2': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'taxonomy': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.Taxonomy']", 'null': 'True', 'blank': 'True'})
+        },
+        u'core.taxonomy': {
+            'Meta': {'object_name': 'Taxonomy'},
+            'created': ('django.db.models.fields.DateTimeField', [], {}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'updated': ('django.db.models.fields.DateTimeField', [], {})
         },
         u'core.triangle': {
             'Meta': {'object_name': 'Triangle'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'key_x': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'key_y': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'key_z': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+            'key_z': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'taxonomy': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.Taxonomy']", 'null': 'True', 'blank': 'True'})
         },
         u'inventory.edge': {
             'Meta': {'object_name': 'Edge'},
@@ -198,32 +246,31 @@ class Migration(SchemaMigration):
             'updated': ('django.db.models.fields.DateTimeField', [], {})
         },
         u'inventory.edgearrowspectrum': {
-            'Meta': {'object_name': 'EdgeArrowSpectrum', '_ormbases': [u'inventory.EdgeRelationMixin']},
-            u'edgerelationmixin_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['inventory.EdgeRelationMixin']", 'unique': 'True', 'primary_key': 'True'}),
+            'Meta': {'unique_together': "(('edge', 'relation'),)", 'object_name': 'EdgeArrowSpectrum'},
+            'edge': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['inventory.Edge']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'relation': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.Arrow']"}),
             'value_x': ('django.db.models.fields.DecimalField', [], {'max_digits': '4', 'decimal_places': '3'})
         },
         u'inventory.edgecrossspectrum': {
-            'Meta': {'object_name': 'EdgeCrossSpectrum', '_ormbases': [u'inventory.EdgeRelationMixin']},
-            u'edgerelationmixin_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['inventory.EdgeRelationMixin']", 'unique': 'True', 'primary_key': 'True'}),
+            'Meta': {'unique_together': "(('edge', 'relation'),)", 'object_name': 'EdgeCrossSpectrum'},
+            'edge': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['inventory.Edge']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'relation': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.Cross']"}),
             'value_x': ('django.db.models.fields.DecimalField', [], {'max_digits': '4', 'decimal_places': '3'}),
             'value_y': ('django.db.models.fields.DecimalField', [], {'max_digits': '4', 'decimal_places': '3'})
         },
         u'inventory.edgelinespectrum': {
-            'Meta': {'object_name': 'EdgeLineSpectrum', '_ormbases': [u'inventory.EdgeRelationMixin']},
-            u'edgerelationmixin_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['inventory.EdgeRelationMixin']", 'unique': 'True', 'primary_key': 'True'}),
+            'Meta': {'unique_together': "(('edge', 'relation'),)", 'object_name': 'EdgeLineSpectrum'},
+            'edge': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['inventory.Edge']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'relation': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.Line']"}),
             'value_x': ('django.db.models.fields.DecimalField', [], {'max_digits': '4', 'decimal_places': '3'})
         },
-        u'inventory.edgerelationmixin': {
-            'Meta': {'object_name': 'EdgeRelationMixin'},
-            'edge': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['inventory.Edge']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
-        },
         u'inventory.edgetrianglespectrum': {
-            'Meta': {'object_name': 'EdgeTriangleSpectrum', '_ormbases': [u'inventory.EdgeRelationMixin']},
-            u'edgerelationmixin_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['inventory.EdgeRelationMixin']", 'unique': 'True', 'primary_key': 'True'}),
+            'Meta': {'unique_together': "(('edge', 'relation'),)", 'object_name': 'EdgeTriangleSpectrum'},
+            'edge': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['inventory.Edge']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'relation': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.Triangle']"}),
             'value_x': ('django.db.models.fields.DecimalField', [], {'max_digits': '4', 'decimal_places': '3'}),
             'value_y': ('django.db.models.fields.DecimalField', [], {'max_digits': '4', 'decimal_places': '3'}),
@@ -246,32 +293,31 @@ class Migration(SchemaMigration):
             'updated': ('django.db.models.fields.DateTimeField', [], {})
         },
         u'inventory.nodearrowspectrum': {
-            'Meta': {'object_name': 'NodeArrowSpectrum', '_ormbases': [u'inventory.NodeRelationMixin']},
-            u'noderelationmixin_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['inventory.NodeRelationMixin']", 'unique': 'True', 'primary_key': 'True'}),
+            'Meta': {'unique_together': "(('node', 'relation'),)", 'object_name': 'NodeArrowSpectrum'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'node': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['inventory.Node']"}),
             'relation': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.Arrow']"}),
             'value_x': ('django.db.models.fields.DecimalField', [], {'max_digits': '4', 'decimal_places': '3'})
         },
         u'inventory.nodecrossspectrum': {
-            'Meta': {'object_name': 'NodeCrossSpectrum', '_ormbases': [u'inventory.NodeRelationMixin']},
-            u'noderelationmixin_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['inventory.NodeRelationMixin']", 'unique': 'True', 'primary_key': 'True'}),
+            'Meta': {'unique_together': "(('node', 'relation'),)", 'object_name': 'NodeCrossSpectrum'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'node': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['inventory.Node']"}),
             'relation': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.Cross']"}),
             'value_x': ('django.db.models.fields.DecimalField', [], {'max_digits': '4', 'decimal_places': '3'}),
             'value_y': ('django.db.models.fields.DecimalField', [], {'max_digits': '4', 'decimal_places': '3'})
         },
         u'inventory.nodelinespectrum': {
-            'Meta': {'object_name': 'NodeLineSpectrum', '_ormbases': [u'inventory.NodeRelationMixin']},
-            u'noderelationmixin_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['inventory.NodeRelationMixin']", 'unique': 'True', 'primary_key': 'True'}),
+            'Meta': {'unique_together': "(('node', 'relation'),)", 'object_name': 'NodeLineSpectrum'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'node': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['inventory.Node']"}),
             'relation': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.Line']"}),
             'value_x': ('django.db.models.fields.DecimalField', [], {'max_digits': '4', 'decimal_places': '3'})
         },
-        u'inventory.noderelationmixin': {
-            'Meta': {'object_name': 'NodeRelationMixin'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'node': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['inventory.Node']"})
-        },
         u'inventory.nodetrianglespectrum': {
-            'Meta': {'object_name': 'NodeTriangleSpectrum', '_ormbases': [u'inventory.NodeRelationMixin']},
-            u'noderelationmixin_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['inventory.NodeRelationMixin']", 'unique': 'True', 'primary_key': 'True'}),
+            'Meta': {'unique_together': "(('node', 'relation'),)", 'object_name': 'NodeTriangleSpectrum'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'node': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['inventory.Node']"}),
             'relation': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.Triangle']"}),
             'value_x': ('django.db.models.fields.DecimalField', [], {'max_digits': '4', 'decimal_places': '3'}),
             'value_y': ('django.db.models.fields.DecimalField', [], {'max_digits': '4', 'decimal_places': '3'}),
