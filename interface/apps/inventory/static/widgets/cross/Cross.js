@@ -53,13 +53,13 @@
             var x = e.clientX - offset.left - (self.handleSize / 2);
             var y = e.clientY - offset.top - (self.handleSize /2);
             
-            self.xVal = x / self.width;
-            self.yVal = y / self.height;
-
             x = (x < self.handleSize) ? 0 : x;
             x = (x > self.width - self.handleSize) ? self.width - self.handleSize : x;
             y = (y < self.handleSize) ? 0 : y;
             y = (y > self.height - self.handleSize) ? self.height - self.handleSize : y;
+
+            self.xVal = x / (self.width - self.handleSize);
+            self.yVal = y / (self.height - self.handleSize);
 
             self.layer.clear();
             self.handle.setX(x);
