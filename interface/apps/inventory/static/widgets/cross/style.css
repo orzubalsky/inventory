@@ -3,7 +3,7 @@
 	height: 200px;
 	width: 200px;	
 }
-#cross {
+.cross {
 	position: absolute;
 	height: 100%;
 	width: 100%;

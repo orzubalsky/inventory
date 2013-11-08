@@ -9,7 +9,6 @@
        
         this.$formFieldX = this.$container.children('input').eq(0);
         this.$formFieldY = this.$container.children('input').eq(1);
-        console.log(this.$formFieldY);
 
         this.minX;
         this.maxX;

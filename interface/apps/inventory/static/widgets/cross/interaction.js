@@ -39,7 +39,13 @@
         {
             var self = this;
             
-            new Cross($('#cross'));
+            var $crosses = $('.cross');
+
+            for (var i=0; i < $crosses.size(); i++)
+            {
+                new Cross($crosses.eq(i));
+            }            
+            self.count = $crosses.size();
         }
         
     };
