@@ -16,23 +16,23 @@
 
             self.interactions();
 
-            // $(".grp-module.grp-table").on("DOMSubtreeModified", function()
-            // {
-            //     var $spectra = $('.spectrumContainer .handle');
-            //     var new_count = $spectra.size();
+            $(".grp-module.grp-table").on("DOMSubtreeModified", function()
+            {
+                var $crosses = $('.cross');
+                var new_count = $crosses.size();
 
-            //     if (new_count > self.count)
-            //     {
-            //         for (var i=0; i < new_count; i++)
-            //         {
-            //             if (i > self.count-2)
-            //             {
-            //                 new Spectrum($spectra.eq(i), self.maxOpacity);
-            //             }
-            //         }
-            //         self.count = new_count;
-            //     }
-            // });            
+                if (new_count > self.count)
+                {
+                    for (var i=0; i < new_count; i++)
+                    {
+                        if (i > self.count-2)
+                        {
+                            new Cross($crosses.eq(i));
+                        }
+                    }
+                    self.count = new_count;
+                }
+            });             
         };  
         
         this.interactions = function()

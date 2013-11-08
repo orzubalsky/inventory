@@ -1,10 +1,12 @@
 <div class="widgetContainer">
-	<span class="key key_x1">{{ relation.key_x1 }}</span>
-	<span class="key key_x2">{{ relation.key_x2 }}</span>
-	<span class="key key_y1">{{ relation.key_y1 }}</span>
-	<span class="key key_y2">{{ relation.key_y2 }}</span>	
+	<div class="keysContainer">
+		<span class="key key_x1">{{ relation.key_x1 }}</span>
+		<span class="key key_x2">{{ relation.key_x2 }}</span>
+		<span class="key key_y1">{{ relation.key_y1 }}</span>
+		<span class="key key_y2">{{ relation.key_y2 }}</span>	
+	</div>
 	<div class="crossContainer">
-	  	<div class="cross" id="cross_{{ field_name }}"></div>
+	  	<div class="cross" id="cross_{{ field.name }}"></div>
 	</div>
 </div>
 <div class="clear"></div>

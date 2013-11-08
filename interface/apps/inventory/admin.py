@@ -32,6 +32,7 @@ class NodeTriangleSpectrumInline(BaseTabularInline):
 
 class NodeCrossSpectrumInline(BaseTabularInline):
     model = NodeCrossSpectrum
+    form = NodeCrossSpectrumForm
 
 
 class NodeAdmin(BaseAdmin):

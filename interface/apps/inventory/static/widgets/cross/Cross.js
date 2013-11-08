@@ -6,7 +6,7 @@
         this.id = $element.attr('id');
         this.width = $element.width();
         this.height = $element.height();
-       
+        
         this.$formFieldX = $('#id_value_x');
         this.$formFieldY = $('#id_value_y');
 
@@ -37,7 +37,7 @@
         self.initHandle();
 
         self.stage.add(self.layer);
-
+        
         self.setValuesFromFormField();
     };      
 	
@@ -55,6 +55,11 @@
             var x = e.clientX - offset.left - (self.handleSize / 2);
             var y = e.clientY - offset.top - (self.handleSize /2);
             
+            console.log(offset);
+            console.log(e);
+            console.log(x);
+            console.log(y);
+
             x = (x < self.handleSize) ? 0 : x;
             x = (x > self.width - self.handleSize) ? self.width - self.handleSize : x;
             y = (y < self.handleSize) ? 0 : y;
