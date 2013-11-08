@@ -6,6 +6,7 @@
     width: 72%;
     float: left;
     cursor: pointer;
+    min-width: 300px;
 }
 .color {
     position: absolute;

@@ -15,6 +15,8 @@
         // init methods
         this.getDimensions();
         this.interaction();        
+
+        console.log(this.$element);
 	};
 	
     /* Calculate the scrollbar container width according to the container and the scrollbar widths */		
@@ -53,16 +55,16 @@
 		var self = this;
         var color;
         
-        self.$element.bind('mouseenter', function(e) 
+        self.$element.on('mouseenter', function(e) 
         {
             $(this).addClass('hover');
         }); 
         
-        self.$element.bind('mouseleave', function(e) 
+        self.$element.on('mouseleave', function(e) 
         {
             $(this).removeClass('hover');
         });
-        
+
         // people can drag the scrollbar 
 		self.$element.draggable({
 		    axis: "x",
@@ -127,3 +129,4 @@
     };
 		
 })(jQuery);
+
