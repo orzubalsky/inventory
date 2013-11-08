@@ -132,7 +132,7 @@
     {
         var self = this;
     	var opacity = (progress * self.maxOpacity > self.minOpacity) ? progress * self.maxOpacity : self.minOpacity;
-    	$('.color', self.$container).css({'opacity':opacity});
+    	$('.background', self.$container).css({'opacity':opacity});
     };
 
     Spectrum.prototype.updateFormField = function(value)

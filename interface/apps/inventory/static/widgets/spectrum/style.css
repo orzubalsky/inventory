@@ -8,29 +8,23 @@
     cursor: pointer;
     min-width: 300px;
 }
-.color {
+.spectrumContainer .background {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
     opacity: 0;
-    background-color: #aaa;    
+    background-color: red;    
 }
-div.spectrum {
+div.handle {
     width: 5%;
     height: 100%;
     background-color: #333;
     cursor: pointer;
 }
-div.spectrum:hover {
+div.handle:hover {
     background-color: #000;
-}
-p.spectrum {
-   float: left;
-   font-size: 8pt;
-   position: relative;
-   top: 4px;
 }
 .clear {
 	clear: both;

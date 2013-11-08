@@ -1,0 +1,11 @@
+.crossContainer {
+	position: relative;
+	height: 200px;
+	width: 200px;	
+}
+#cross {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: transparent;
+}

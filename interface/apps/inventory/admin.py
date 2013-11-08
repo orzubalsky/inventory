@@ -23,6 +23,7 @@ class NodeArrowSpectrumInline(BaseTabularInline):
 
 class NodeLineSpectrumInline(BaseTabularInline):
     model = NodeLineSpectrum
+    form = NodeLineSpectrumForm
 
 
 class NodeTriangleSpectrumInline(BaseTabularInline):
@@ -79,12 +80,12 @@ class EdgeAdmin(BaseAdmin):
     )
 
 
-class NodeArrowSpectrumAdmin(BaseAdmin):
-    fields = ('node', 'relation', 'value_x')
-    form = NodeArrowSpectrumForm
+class NodeCrossSpectrumAdmin(BaseAdmin):
+    fields = ('node', 'relation', 'value_x', 'value_y')
+    form = NodeCrossSpectrumForm
 
 
 # register admin models
 admin.site.register(Node, NodeAdmin)
 admin.site.register(Edge, EdgeAdmin)
-admin.site.register(NodeArrowSpectrum, NodeArrowSpectrumAdmin)
+admin.site.register(NodeCrossSpectrum, NodeCrossSpectrumAdmin)

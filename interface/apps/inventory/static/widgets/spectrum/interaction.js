@@ -5,7 +5,7 @@
  */
 
 ;(function($){
-    var arrow = window.arrow = new function() 
+    var spectra = window.spectra = new function() 
     {   
         this.scrollbarWidth;
         this.maxOpacity = 1;
@@ -20,7 +20,7 @@
 
             $(".grp-module.grp-table").on("DOMSubtreeModified", function()
             {
-                var $spectra = $('.spectrum');
+                var $spectra = $('.spectrumContainer .handle');
                 var new_count = $spectra.size();
 
                 if (new_count > self.count)
@@ -40,7 +40,7 @@
         this.interactions = function()
         {
             var self = this;
-            var $spectra = $('.spectrum');
+            var $spectra = $('.spectrumContainer .handle');
             self.count = $spectra.size();
             
             for (var i=0; i < $spectra.size(); i++)
@@ -55,5 +55,5 @@
 /* good old fashioned document-ready function call. starting js action. */
 $(document).ready(function()
 {   
-    arrow.init();    
+    spectra.init();    
 });
